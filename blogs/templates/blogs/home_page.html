@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %} 
+<div class="container-xxl bd-gutter mt-3 my-md-4 bd-layout">
+
+    <main class="container">
+
+        <div class="row g-5">
+    
+            <div class="col-md-12">
+                {% include "blogs/featured.html" %}
+            </div>
+    
+        </div>
+
+        <div class="row g-5">
+            <div class="col-md-8">
+                <h3 class="pb-4 mb-4 fst-italic border-bottom">
+                    Más Artículos
+                </h3>
+                {% for post in post_list %}
+                    <article class="blog-post">
+                        <h2 class="blog-post-title mb-1">
+                            <a href="#" style="text-decoration: none"
+                               class="text-black">
+                                {{ post.title }}
+                            </a>
+                        </h2>
+                        <p class="blog-post-meta">{{ post.date_created.date }}. {{post.author}}</p>
+
+                        <hr>
+                        <p>{{ post.overview }}</p>
+                    </article>
+                {% endfor %}
+
+            </div>
+
+            <div class="col-md-4">
+                <div class="position-sticky" style="top: 2rem;">
+                    <div class="p-4 mb-3 bg-light rounded">
+                        <h4 class="fst-italic">Sobre</h4>
+                        <p class="mb-0">Información adicional sobre lo que se encuentra dentro de esta página.</p>
+                    </div>
+            
+                    <div class="p-4">
+                        <h4 class="fst-italic">Más Cosas?</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+</div>
+{% endblock content %}
