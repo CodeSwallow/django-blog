@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.views import generic
 
 from blogs.models import Post, Category
 
@@ -17,3 +18,13 @@ def home_page(request):
     }
 
     return render(request, 'blogs/home_page.html', context=context)
+
+
+class PostDetailView(generic.DetailView):
+    model = Post
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        return context
+
