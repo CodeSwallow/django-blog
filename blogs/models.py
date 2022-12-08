@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.urls import reverse
+from django.utils import timezone
 
 # Create your models here.
 
@@ -15,9 +16,13 @@ class Post(models.Model):
     categories = models.ManyToManyField('Category')
     featured = models.BooleanField(default=False)
     image = models.ImageField(upload_to='post_images/', blank=True, null=True)
+    pub_date = models.DateTimeField(default=timezone.now)
 
     def get_absolute_url(self):
         return reverse("blogs:post", kwargs={"slug": self.slug})
+
+    class Meta:
+        ordering = ["-date_created"]
     
     def __str__(self):
         return self.title
