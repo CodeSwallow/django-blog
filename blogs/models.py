@@ -14,6 +14,7 @@ class Post(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
     categories = models.ManyToManyField('Category')
     featured = models.BooleanField(default=False)
+    image = models.ImageField(upload_to='post_images/', blank=True, null=True)
 
     def get_absolute_url(self):
         return reverse("blogs:post", kwargs={"slug": self.slug})
