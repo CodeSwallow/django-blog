@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %} 
+<div class="container-xxl bd-gutter mt-3 my-md-4 bd-layout">
+
+    <main class="container">
+
+        <div class="row g-5">
+            <div class="col-md-8">
+                <h3 class="pb-4 mb-4 fst-italic border-bottom">
+                    Destacados
+                </h3>
+                {% for post in post_list %}
+                    <div class="card mb-3">
+                        {% if post.image %}
+                            <img src="{{ post.image.url }}" class="card-img-top" alt="thumbnail">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ post.title }}</h5>
+                            <p class="card-text">{{ post.overview }}</p>
+                            <p class="card-text"><small class="text-muted">Last updated {{ post.pub_date.date }}</small></p>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+
+            <div class="col-md-4">
+                <div class="position-sticky" style="top: 2rem;">
+                    <div class="p-4 mb-3 bg-light rounded">
+                        <h4 class="fst-italic">Encontrados:</h4>
+                        <p class="mb-0">{{ post_list|length }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+</div>
+{% endblock %}
