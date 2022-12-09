@@ -34,6 +34,7 @@ class PostDetailView(generic.DetailView):
 class FeaturedListView(generic.ListView):
     model = Post
     template_name = 'blogs/results.html'
+    paginate_by = 2
 
     def get_queryset(self):
         query = Post.objects.filter(featured=True).filter(
@@ -45,6 +46,7 @@ class FeaturedListView(generic.ListView):
 class CategoryListView(generic.ListView):
     model = Post
     template_name = 'blogs/results.html'
+    paginate_by = 2
 
     def get_queryset(self):
         query = self.request.path.replace('/category/', '')
@@ -58,6 +60,7 @@ class CategoryListView(generic.ListView):
 class SearchResultsView(generic.ListView):
     model = Post
     template_name = 'blogs/results.html'
+    paginate_by = 2
 
     def get_queryset(self):
         query = self.request.GET.get('search')
@@ -68,7 +71,7 @@ class SearchResultsView(generic.ListView):
         ).distinct()
         return post_list
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context['categories'] = Category.objects.all()
-    #     return context
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['query'] = self.request.GET.get('search')
+        return context

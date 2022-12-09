@@ -29,11 +29,26 @@
                 <div class="position-sticky" style="top: 2rem;">
                     <div class="p-4 mb-3 bg-light rounded">
                         <h4 class="fst-italic">Encontrados:</h4>
-                        <p class="mb-0">{{ post_list|length }}</p>
+                        <p class="mb-0">{{ page_obj.paginator.count }}</p>
                     </div>
                 </div>
             </div>
         </div>
+        
+        <nav class="blog-pagination" aria-label="Pagination">
+            {% if page_obj.has_previous %}
+                <a class="btn btn-outline-primary rounded-pill"
+                   href="?page={{ page_obj.previous_page_number }}{% if query %}&search={{ query }}{% endif %}">Antes</a>
+            {% else %}
+                <a class="btn btn-outline-secondary rounded-pill disabled">Antes</a>
+            {% endif %}
+            {% if page_obj.has_next %}
+                <a class="btn btn-outline-primary rounded-pill"
+                   href="?page={{ page_obj.next_page_number }}{% if query %}&search={{ query }}{% endif %}">Siguiente</a>
+            {% else %}
+                <a class="btn btn-outline-secondary rounded-pill disabled">Siguiente</a>
+            {% endif %}
+        </nav>   
 
     </main>
 </div>
