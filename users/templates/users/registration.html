@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container-xxl bd-gutter mt-3 my-md-4 bd-layout">
+
+    <main class="container">
+
+        <div class="row g-5">
+            <div class="col-md-3"></div>
+
+            <div class="col-md-6">
+
+                <div class="w-100 m-auto text-center">
+                    <form method="POST" class="form-group">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <button type="submit" class="btn btn-success">Register</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-md-3"></div>
+        </div>
+
+    </main>
+</div>
+{% endblock %}

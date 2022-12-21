@@ -21,12 +21,16 @@
                 {% for post in post_list %}
                     <article class="blog-post">
                         <h2 class="blog-post-title mb-1">
-                            <a href="#" style="text-decoration: none"
+                            {% comment %} <a href="{% url 'blogs:post' post.slug %}" style="text-decoration: none"
+                               class="text-black">
+                                {{ post.title }}
+                            </a> {% endcomment %}
+                            <a href="{{ post.get_absolute_url }}" style="text-decoration: none"
                                class="text-black">
                                 {{ post.title }}
                             </a>
                         </h2>
-                        <p class="blog-post-meta">{{ post.date_created.date }}. {{post.author}}</p>
+                        <p class="blog-post-meta">{{ post.pub_date.date }}. {{post.author}}</p>
 
                         <hr>
                         <p>{{ post.overview }}</p>
