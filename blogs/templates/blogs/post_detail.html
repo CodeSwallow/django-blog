@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load markdown_extras %}
+{% load crispy_forms_tags %}
 
 {% block content %} 
 
@@ -25,8 +26,16 @@
 
                 <p>{{ post.content | markdown | safe }}</p>
 
-                <h3>Comentarios</h3>
+                <h3 id="comments-section">Comentarios</h3>
                 <hr class="d-none d-md-block my-2 mb-3 mt-2">
+
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <button class="btn btn-primary" type="submit">Enter</button>
+                </form>
+                <hr class="d-none d-md-block my-2 mb-3 mt-2">
+
                 {% for comment in post.comment_set.all %}
                     <div class="mt-4 mb-2 border border-opacity-10 rounded p-1">
                         <div class="row">
